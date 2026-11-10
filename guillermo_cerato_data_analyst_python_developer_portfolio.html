@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guillermo Cerato | Data Analyst & Python Developer Portfolio</title>
+    
+    <!-- Meta tags for SEO & Social Media Previews -->
+    <meta property="og:title" content="Guillermo Cerato - Data Analyst & Python Developer">
+    <meta property="og:description" content="Portfolio of Guillermo Cerato. Transforming complex data into strategic business decisions with Python, SQL, Streamlit, and Power BI.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Willy71/background/main/picture/002.png">
+    <meta property="og:url" content="https://guillermocerato.streamlit.app">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#080c16',
+                            card: '#0f172a',
+                            border: '#1e293b',
+                            cyan: '#06b6d4',
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6',
+                            emerald: '#10b981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #080c16;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Ambient subtle grid background */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism effects */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(6, 182, 212, 0.15);
+        }
+
+        /* Gradient Glows */
+        .glow-cyan {
+            box-shadow: 0 0 40px -10px rgba(6, 182, 212, 0.3);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080c16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen bg-grid-pattern selection:bg-cyan-500 selection:text-slate-900">
+
+    <!-- Atmospheric Glow Blobs in Background -->
+    <div class="fixed top-0 left-1/4 -z-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="fixed top-1/3 right-10 -z-10 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-10 left-10 -z-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-5 py-3.5 rounded-xl glass-panel shadow-2xl border border-cyan-500/40 text-sm font-medium text-white">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-cyan-400 text-lg"></i>
+        <span id="toast-msg">Notificación enviada</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Monogram -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-purple-600 p-[2px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all">
+                    <div class="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center font-display font-extrabold text-cyan-400 text-lg">
+                        GC
+                    </div>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-lg text-white tracking-tight block leading-tight">Guillermo Cerato</span>
+                    <span class="text-xs text-cyan-400 font-medium tracking-wide flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                        Data Analyst & Python Dev
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                <a href="#about" class="px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 font-medium rounded-lg hover:bg-slate-800/50 transition" data-i18n="nav_about">Sobre Mí</a>
+                <a href="#skills" class="px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 font-medium rounded-lg hover:bg-slate-800/50 transition" data-i18n="nav_skills">Habilidades</a>
+                <a href="#projects" class="px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 font-medium rounded-lg hover:bg-slate-800/50 transition" data-i18n="nav_projects">Proyectos</a>
+                <a href="#certifications" class="px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 font-medium rounded-lg hover:bg-slate-800/50 transition" data-i18n="nav_certs">Certificaciones</a>
+                <a href="#recommendations" class="px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 font-medium rounded-lg hover:bg-slate-800/50 transition" data-i18n="nav_recs">Referencias</a>
+                <a href="#contact" class="px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 font-medium rounded-lg hover:bg-slate-800/50 transition" data-i18n="nav_contact">Contacto</a>
+            </nav>
+
+            <!-- Language Switcher & Quick CTA -->
+            <div class="hidden sm:flex items-center gap-3">
+                <!-- Language Toggle Button -->
+                <div class="flex items-center bg-slate-900 border border-slate-700/60 rounded-lg p-0.5 text-xs font-semibold">
+                    <button id="btn-lang-es" class="px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold transition">ES</button>
+                    <button id="btn-lang-en" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition">EN</button>
+                </div>
+
+                <!-- Direct WhatsApp CTA -->
+                <a href="https://wa.me/5542991657847" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 text-xs font-semibold flex items-center gap-2 transition">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span>WhatsApp</span>
+                </a>
+                
+                <!-- Email CTA -->
+                <a href="#contact" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 text-xs font-bold shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/40 transition">
+                    <i class="fa-regular fa-paper-plane mr-1.5"></i> <span data-i18n="nav_talk">Hablemos</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <div class="flex items-center gap-2 md:hidden">
+                <div class="flex items-center bg-slate-900 border border-slate-700/60 rounded-lg p-0.5 text-xs font-semibold mr-1">
+                    <button id="btn-lang-es-mobile" class="px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold">ES</button>
+                    <button id="btn-lang-en-mobile" class="px-2 py-1 rounded text-slate-400">EN</button>
+                </div>
+                <button id="mobile-menu-btn" aria-label="Abrir menú" class="w-10 h-10 rounded-lg glass-panel flex items-center justify-center text-slate-300 hover:text-cyan-400">
+                    <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 border-t border-slate-800 bg-slate-950/95 backdrop-blur-xl">
+            <div class="flex flex-col space-y-2 mt-2">
+                <a href="#about" class="mobile-nav-link px-3 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400 text-sm font-medium" data-i18n="nav_about">Sobre Mí</a>
+                <a href="#skills" class="mobile-nav-link px-3 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400 text-sm font-medium" data-i18n="nav_skills">Habilidades</a>
+                <a href="#projects" class="mobile-nav-link px-3 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400 text-sm font-medium" data-i18n="nav_projects">Proyectos</a>
+                <a href="#certifications" class="mobile-nav-link px-3 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400 text-sm font-medium" data-i18n="nav_certs">Certificaciones</a>
+                <a href="#recommendations" class="mobile-nav-link px-3 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400 text-sm font-medium" data-i18n="nav_recs">Referencias</a>
+                <a href="#contact" class="mobile-nav-link px-3 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400 text-sm font-medium" data-i18n="nav_contact">Contacto</a>
+                <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+                    <a href="https://wa.me/5542991657847" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-emerald-500/20 text-emerald-300 font-semibold text-center text-sm flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Directo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-24">
+
+        <!-- ================= HERO SECTION ================= -->
+        <section id="hero" class="relative pt-6 sm:pt-12 pb-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left: Headline & Bio Intro -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <!-- Status Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 text-cyan-300 text-xs font-medium shadow-inner">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                        <i class="fa-solid fa-location-dot text-cyan-400"></i>
+                        <span>Ponta Grossa, PR, Brasil • Disponible para Proyectos</span>
+                    </div>
+
+                    <!-- Main Catchy Title -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-white leading-tight">
+                        Transformando datos complejos en 
+                        <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
+                            decisiones estratégicas
+                        </span>
+                    </h1>
+
+                    <!-- Lead Paragraph -->
+                    <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed" data-i18n="hero_desc">
+                        Hola, soy <strong class="text-white font-semibold">Guillermo Cerato</strong>. Analista de Datos certificado por Google, Desarrollador Python y Analista Funcional. Conecto el rigor estadístico y la ingeniería de software para impulsar el crecimiento empresarial.
+                    </p>
+
+                    <!-- Metrics Quick Bar -->
+                    <div class="grid grid-cols-3 gap-3 sm:gap-4 max-w-lg mx-auto lg:mx-0 pt-2">
+                        <div class="glass-panel p-3.5 rounded-xl text-center border-slate-800">
+                            <span class="block text-2xl font-bold font-display text-cyan-400">8+</span>
+                            <span class="text-xs text-slate-400 font-medium" data-i18n="stat_projects">Proyectos Clave</span>
+                        </div>
+                        <div class="glass-panel p-3.5 rounded-xl text-center border-slate-800">
+                            <span class="block text-2xl font-bold font-display text-blue-400">Google</span>
+                            <span class="text-xs text-slate-400 font-medium" data-i18n="stat_cert">Certificado</span>
+                        </div>
+                        <div class="glass-panel p-3.5 rounded-xl text-center border-slate-800">
+                            <span class="block text-2xl font-bold font-display text-purple-400">Nokia</span>
+                            <span class="text-xs text-slate-400 font-medium" data-i18n="stat_exp">Trayectoria Líder</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition flex items-center gap-2">
+                            <i class="fa-solid fa-chart-simple"></i>
+                            <span data-i18n="hero_btn_projects">Explorar Proyectos</span>
+                        </a>
+                        <a href="https://github.com/Willy71" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-xl glass-panel hover:bg-slate-800 text-white font-medium text-sm border-slate-700/80 transition flex items-center gap-2">
+                            <i class="fa-brands fa-github text-base"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/willycerato" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-xl glass-panel hover:bg-slate-800 text-cyan-400 font-medium text-sm border-slate-700/80 transition flex items-center gap-2">
+                            <i class="fa-brands fa-linkedin text-base"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Profile Card & Tech Visual -->
+                <div class="lg:col-span-5 flex flex-col items-center justify-center">
+                    <div class="relative w-full max-w-sm">
+                        <!-- Background Glow Circle -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-purple-600 rounded-3xl blur-2xl opacity-25 -z-10 animate-pulse"></div>
+
+                        <!-- Main Profile Presentation Card -->
+                        <div class="glass-panel p-6 rounded-3xl border border-slate-700/70 shadow-2xl relative overflow-hidden text-center">
+                            
+                            <!-- Top Tech Tag -->
+                            <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 text-[11px] font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-code"></i> Python & SQL
+                            </div>
+
+                            <!-- Avatar with Gradient Ring -->
+                            <div class="relative mx-auto w-44 h-44 mb-4">
+                                <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 blur-sm opacity-70"></div>
+                                <img src="https://github.com/Willy71/background/blob/main/picture/001%20redondo.png?raw=true" 
+                                     alt="Guillermo Cerato" 
+                                     onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                     class="relative w-full h-full rounded-full object-cover border-2 border-slate-900 bg-slate-900 shadow-2xl">
+                            </div>
+
+                            <!-- Name & Headline -->
+                            <h2 class="text-2xl font-bold font-display text-white">Guillermo Cerato</h2>
+                            <p class="text-sm font-medium text-cyan-400 mb-3">Data Analyst • Functional Analyst</p>
+
+                            <!-- Mini Summary -->
+                            <p class="text-xs text-slate-300 leading-relaxed px-2 mb-4" data-i18n="hero_card_mini">
+                                Especialista en modelado de datos, tableros interactivos con Streamlit & Power BI, y optimización de procesos operativos.
+                            </p>
+
+                            <!-- Tool Badges -->
+                            <div class="flex flex-wrap items-center justify-center gap-1.5 pt-2 border-t border-slate-800">
+                                <span class="px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 text-[11px] font-medium">Python</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 text-[11px] font-medium">Pandas</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 text-[11px] font-medium">SQL</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 text-[11px] font-medium">Streamlit</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 text-[11px] font-medium">Power BI</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 text-[11px] font-medium">ETL</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Divider Line -->
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+
+        <!-- ================= ABOUT ME SECTION ================= -->
+        <section id="about" class="space-y-10">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-xs uppercase font-bold tracking-widest text-cyan-400" data-i18n="sec_about_tag">Trayectoria & Perfil</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white" data-i18n="sec_about_title">Sobre Mí</h2>
+                <div class="w-16 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Left: Story Narrative -->
+                <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-2xl border-slate-800 space-y-5 text-slate-300 leading-relaxed">
+                    <p class="text-base sm:text-lg" data-i18n="about_p1">
+                        Soy un profesional argentino radicado en <strong class="text-white">Brasil desde 2016</strong>, con una trayectoria sólida y multidisciplinaria que combina turismo, gestión empresarial y liderazgo de equipos de alto rendimiento.
+                    </p>
+                    <p data-i18n="about_p2">
+                        Mi carrera en Argentina, destacando roles clave en <strong class="text-cyan-300">Nokia</strong>, forjó una sólida base en la toma de decisiones basada en datos, donde el análisis estadístico y los indicadores de gestión (KPIs) fueron fundamentales para maximizar la rentabilidad y la eficiencia operativa.
+                    </p>
+                    <p data-i18n="about_p3">
+                        Mi pasión por la analítica me impulsó a especializarme a fondo en <strong class="text-white">SQL, Python, Streamlit y Power BI</strong>. Poseo la certificación oficial de <strong class="text-cyan-400">Google Data Analytics</strong> y la formación de <strong class="text-blue-400">Analista Funcional (SilverTech)</strong>. Mi motor es la curiosidad constante y la dedicación para convertir grandes volúmenes de datos dispersos en decisiones estratégicas de alto impacto.
+                    </p>
+
+                    <!-- Key Pillars -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-chart-line text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white" data-i18n="pillar_1_title">Toma de Decisiones con Datos</h4>
+                                <p class="text-xs text-slate-400" data-i18n="pillar_1_desc">Extracción de insights accionables alineados con la realidad comercial.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-laptop-code text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white" data-i18n="pillar_2_title">Desarrollo Python & Web</h4>
+                                <p class="text-xs text-slate-400" data-i18n="pillar_2_desc">Construcción de dashboards interactivos y aplicaciones web operativas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Experience & Capability Cards -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-blue-500/20">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-base">Google Certified Professional</h4>
+                            <p class="text-xs text-slate-400">8 cursos completos en analítica de datos, R, SQL, Tableau y limpieza avanzada.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-purple-500/20">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-base">Visión de Negocio & Comercial</h4>
+                            <p class="text-xs text-slate-400">Maestría en Dirección Comercial (Marketing) por UADE con amplia experiencia en ventas y gestión.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-cyan-500/20">
+                            <i class="fa-solid fa-language"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-base">Perfil Internacional Trilingüe</h4>
+                            <p class="text-xs text-slate-400">Español nativo, Portugués fluido profesional e Inglés para entornos colaborativos globales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider Line -->
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+
+        <!-- ================= SKILLS MATRIX SECTION ================= -->
+        <section id="skills" class="space-y-10">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-xs uppercase font-bold tracking-widest text-cyan-400" data-i18n="sec_skills_tag">Herramientas & Competencias</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white" data-i18n="sec_skills_title">Habilidades Técnicas</h2>
+                <div class="w-16 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Programming & Data -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl">
+                        <i class="fa-brands fa-python"></i>
+                    </div>
+                    <h3 class="text-lg font-bold font-display text-white group-hover:text-cyan-400 transition" data-i18n="skill_col1_title">Programación & Datos</h3>
+                    <p class="text-xs text-slate-400" data-i18n="skill_col1_desc">Ingeniería y tratamiento de datos para preparación de analítica fiable.</p>
+                    <ul class="space-y-2.5 pt-2 text-sm text-slate-300">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>Python (Pandas, NumPy, Matplotlib)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>SQL (Consultas, Joins, Agregaciones)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>Streamlit (Dashboards Interactivos)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>Procesos ETL & Limpieza de Datos</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>Programación en R (Google Analytics)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Business & Visualization -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3 class="text-lg font-bold font-display text-white group-hover:text-blue-400 transition" data-i18n="skill_col2_title">Negocio & Visualización</h3>
+                    <p class="text-xs text-slate-400" data-i18n="skill_col2_desc">Traducción de métricas numéricas a relatos comprensibles para gerencia.</p>
+                    <ul class="space-y-2.5 pt-2 text-sm text-slate-300">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-blue-400 text-xs"></i>
+                            <span>Visualización de Datos & Storytelling</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-blue-400 text-xs"></i>
+                            <span>Power BI & Modelado DAX</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-blue-400 text-xs"></i>
+                            <span>Excel Avanzado & Google Sheets</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-blue-400 text-xs"></i>
+                            <span>Google Slides & Presentación Ejecutiva</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-blue-400 text-xs"></i>
+                            <span>Definición de KPIs & Métricas de Negocio</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Tools & Methodologies -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-cubes-stacked"></i>
+                    </div>
+                    <h3 class="text-lg font-bold font-display text-white group-hover:text-purple-400 transition" data-i18n="skill_col3_title">Herramientas & Métodos</h3>
+                    <p class="text-xs text-slate-400" data-i18n="skill_col3_desc">Marcos ágiles para relevamiento de requisitos y entrega continua.</p>
+                    <ul class="space-y-2.5 pt-2 text-sm text-slate-300">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-purple-400 text-xs"></i>
+                            <span>Análisis Funcional & Documentación</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-purple-400 text-xs"></i>
+                            <span>Jira & Miro (Tableros de Proyecto)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-purple-400 text-xs"></i>
+                            <span>Figma (Prototipado UX/UI de Apps)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-purple-400 text-xs"></i>
+                            <span>Metodologías Ágiles (Scrum, Kanban)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-purple-400 text-xs"></i>
+                            <span>Git & Control de Versiones en GitHub</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider Line -->
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+
+        <!-- ================= PROJECTS PORTFOLIO SECTION ================= -->
+        <section id="projects" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div class="space-y-2">
+                    <span class="text-xs uppercase font-bold tracking-widest text-cyan-400" data-i18n="sec_projects_tag">Casos Reales & Desarrollos</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white" data-i18n="sec_projects_title">Mis Proyectos</h2>
+                    <p class="text-sm text-slate-400 max-w-xl" data-i18n="sec_projects_sub">
+                        Explora aplicaciones en vivo y casos de estudio analíticos desplegados en producción con Python y Streamlit.
+                    </p>
+                </div>
+
+                <!-- Project Filter Buttons -->
+                <div class="flex flex-wrap items-center gap-2 p-1.5 rounded-xl glass-panel border-slate-800 self-start md:self-auto">
+                    <button class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950 transition" data-filter="all" data-i18n="filter_all">Todos (8)</button>
+                    <button class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition" data-filter="analytics" data-i18n="filter_analytics">Data Analytics</button>
+                    <button class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition" data-filter="webapps" data-i18n="filter_webapps">Web Apps & CRM</button>
+                    <button class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition" data-filter="tools" data-i18n="filter_tools">Sistemas & CLI</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Project 1: Coursera Case Study -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between group" data-category="analytics">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-950">
+                            <img src="https://github.com/Willy71/background/blob/main/picture/Coursera.png?raw=true" 
+                                 alt="Coursera Cyclistic Case Study" 
+                                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-cyan-950/90 text-cyan-300 border border-cyan-500/40 text-[10px] font-bold uppercase tracking-wider">
+                                Data Analytics
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="text-base font-bold font-display text-white group-hover:text-cyan-400 transition">
+                                Coursera Case Study (Cyclistic)
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="p1_desc">
+                                Análisis integral de viajes de bicicletas en Chicago. Dashboard interactivo en Python y Streamlit para optimizar la conversión de usuarios ocasionales a miembros anuales.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Python</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Streamlit</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Pandas</span>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                            <a href="https://chicagobike.streamlit.app/" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> <span data-i18n="btn_demo">App en Vivo</span>
+                            </a>
+                            <button onclick="openProjectModal('cyclistic')" class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs transition" title="Ver detalles">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Strategic Marketing Plan -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between group" data-category="analytics">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-950">
+                            <img src="https://github.com/Willy71/vk_tarefa1/blob/main/picture/Marketing.png?raw=true" 
+                                 alt="Strategic Marketing Plan" 
+                                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-cyan-950/90 text-cyan-300 border border-cyan-500/40 text-[10px] font-bold uppercase tracking-wider">
+                                Data Analytics
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="text-base font-bold font-display text-white group-hover:text-cyan-400 transition">
+                                Strategic Marketing Plan
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="p2_desc">
+                                Plan estratégico basado en datos para campaña de marketing. Segmentación de clientes clave, evaluación de retorno y modelado predictivo de audiencia.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Marketing</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Streamlit</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Data Analytics</span>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                            <a href="https://vktarefa1.streamlit.app/" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> <span data-i18n="btn_demo">App en Vivo</span>
+                            </a>
+                            <button onclick="openProjectModal('marketing')" class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs transition" title="Ver detalles">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Mechanic Shop Management -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between group" data-category="webapps">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-950">
+                            <img src="https://github.com/Willy71/background/blob/main/picture/Portfolio%20011.png?raw=true" 
+                                 alt="Mechanic Shop Management" 
+                                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-blue-950/90 text-blue-300 border border-blue-500/40 text-[10px] font-bold uppercase tracking-wider">
+                                Web App
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="text-base font-bold font-display text-white group-hover:text-blue-400 transition">
+                                Oficina Mecânica (ERP App)
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="p3_desc">
+                                Aplicación web completa en Python para la gestión de talleres automotrices: control de clientes, órdenes de servicio, historial de piezas y facturación.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Python</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">CRUD / SQL</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Streamlit</span>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                            <a href="https://oficinamecanica.streamlit.app/" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> <span data-i18n="btn_demo">App en Vivo</span>
+                            </a>
+                            <button onclick="openProjectModal('oficina')" class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs transition" title="Ver detalles">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Hotel Service App -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between group" data-category="webapps">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-950">
+                            <img src="https://i.postimg.cc/MHK9TS34/Hotel001.jpg" 
+                                 alt="Hotel Service App" 
+                                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-blue-950/90 text-blue-300 border border-blue-500/40 text-[10px] font-bold uppercase tracking-wider">
+                                Web App
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="text-base font-bold font-display text-white group-hover:text-blue-400 transition">
+                                Hotel Service Management
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="p4_desc">
+                                Sistema de servicios hoteleros y reservas. Módulo interactivo de solicitud de servicios a la habitación, estado de reservas y analítica para conserjería.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Python</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Hospitality</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Render</span>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                            <a href="https://hotelservice-ynsh.onrender.com/" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> <span data-i18n="btn_demo">App en Vivo</span>
+                            </a>
+                            <button onclick="openProjectModal('hotel')" class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs transition" title="Ver detalles">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: Functional Analysis Proposal -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between group" data-category="analytics">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-950">
+                            <img src="https://github.com/Willy71/background/blob/main/picture/Miniatura%20-%20Analista%20funcional.png?raw=true" 
+                                 alt="New Functionality Proposal" 
+                                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-cyan-950/90 text-cyan-300 border border-cyan-500/40 text-[10px] font-bold uppercase tracking-wider">
+                                Product & Analysis
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="text-base font-bold font-display text-white group-hover:text-cyan-400 transition">
+                                Propuesta Funcional (Confort)
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="p5_desc">
+                                Análisis funcional detallado y diseño de requerimientos para nueva funcionalidad en una aplicación existente, con prototipo funcional interactivo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Análisis Funcional</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">UX / Stories</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Streamlit</span>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                            <a href="https://confort.streamlit.app/" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> <span data-i18n="btn_demo">App en Vivo</span>
+                            </a>
+                            <button onclick="openProjectModal('confort')" class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs transition" title="Ver detalles">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: CRM for Leads -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between group" data-category="webapps">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-950">
+                            <img src="https://github.com/Willy71/background/blob/main/picture/Portfolio%20012.png?raw=true" 
+                                 alt="CRM for Leads" 
+                                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-blue-950/90 text-blue-300 border border-blue-500/40 text-[10px] font-bold uppercase tracking-wider">
+                                Web App
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="text-base font-bold font-display text-white group-hover:text-blue-400 transition">
+                                CRM de Leads Automotriz
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="p6_desc">
+                                Herramienta ágil de seguimiento y conversión de clientes potenciales para talleres mecánicos, facilitando la trazabilidad comercial y métricas de embudo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">CRM</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Sales Funnel</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Python</span>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                            <a href="https://oficinasleads.streamlit.app/" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> <span data-i18n="btn_demo">App en Vivo</span>
+                            </a>
+                            <button onclick="openProjectModal('crm')" class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs transition" title="Ver detalles">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 7: Car Wash CLI System -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between group" data-category="tools">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-950">
+                            <img src="https://i.postimg.cc/nrR09P6L/lavajato.jpg" 
+                                 alt="Car Wash System" 
+                                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-purple-950/90 text-purple-300 border border-purple-500/40 text-[10px] font-bold uppercase tracking-wider">
+                                CLI System
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="text-base font-bold font-display text-white group-hover:text-purple-400 transition">
+                                Car Wash System (Lava Jato)
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="p7_desc">
+                                Sistema de consola en Python para la administración de turnos, agendamiento de lavados automotrices, cálculo de tarifas y control de servicios.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Python CLI</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">OOP</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Automation</span>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                            <a href="https://github.com/Willy71/washcar" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/30 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-brands fa-github text-xs"></i> <span>Código GitHub</span>
+                            </a>
+                            <button onclick="openProjectModal('washcar')" class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs transition" title="Ver detalles">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 8: Parking Lot Management -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between group" data-category="tools">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-950">
+                            <img src="https://i.postimg.cc/ZRLf4RHp/Estacionamiento.jpg" 
+                                 alt="Parking Management System" 
+                                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-purple-950/90 text-purple-300 border border-purple-500/40 text-[10px] font-bold uppercase tracking-wider">
+                                CLI System
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="text-base font-bold font-display text-white group-hover:text-purple-400 transition">
+                                Parking Lot Simulator
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="p8_desc">
+                                Algoritmo en Python para simular y controlar la ocupación de un estacionamiento, cálculo de fracciones de tiempo transcurrido y liquidación de tarifas.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Python</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Algoritmos</span>
+                            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Simulación</span>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                            <a href="https://github.com/Willy71/parking" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/30 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-brands fa-github text-xs"></i> <span>Código GitHub</span>
+                            </a>
+                            <button onclick="openProjectModal('parking')" class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs transition" title="Ver detalles">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Divider Line -->
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+
+        <!-- ================= EDUCATION & CERTIFICATIONS ================= -->
+        <section id="certifications" class="space-y-10">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-xs uppercase font-bold tracking-widest text-cyan-400" data-i18n="sec_edu_tag">Formación Continua</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white" data-i18n="sec_edu_title">Educación & Certificaciones</h2>
+                <div class="w-16 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left: Google Analytics Deep Dive -->
+                <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-2xl border-slate-800 space-y-6">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="space-y-1">
+                            <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs font-bold uppercase tracking-wider">
+                                Credencial Verificada Coursera
+                            </span>
+                            <h3 class="text-xl sm:text-2xl font-bold font-display text-white">Google Data Analytics Professional Certificate</h3>
+                            <p class="text-xs text-slate-400">Emisor: Google Career Certificates • ID: LMTDNASPE8WP</p>
+                        </div>
+                        <a href="https://www.coursera.org/account/accomplishments/professional-cert/LMTDNASPE8WP" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shrink-0 transition flex items-center gap-1.5 shadow-md shadow-cyan-500/20">
+                            <i class="fa-solid fa-certificate"></i>
+                            <span data-i18n="btn_verify">Ver Certificado</span>
+                        </a>
+                    </div>
+
+                    <p class="text-sm text-slate-300 leading-relaxed" data-i18n="google_cert_desc">
+                        Programa riguroso de especialización que abarca el ciclo de vida completo de los datos: formulación de hipótesis, extracción, procesamiento y limpieza rigurosa, modelado analítico en R y SQL, y visualización en Tableau.
+                    </p>
+
+                    <!-- The 8 Courses in Google Certification -->
+                    <div class="space-y-2 pt-2">
+                        <div class="flex items-center justify-between text-xs font-semibold text-slate-300 mb-1">
+                            <span data-i18n="courses_breakdown">Programa de 8 Cursos Completados:</span>
+                            <span class="text-cyan-400 font-bold">100% Finalizado</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                                <span>1. Foundations: Data Everywhere</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                                <span>2. Ask Questions to Make Decisions</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                                <span>3. Prepare Data for Exploration</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                                <span>4. Process Data from Dirty to Clean</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                                <span>5. Analyze Data to Answer Questions</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                                <span>6. Share Data with Art of Visualization</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                                <span>7. Data Analysis with R Programming</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                                <span>8. Capstone Project: Complete Case Study</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Other Degrees & Visual Certificate -->
+                <div class="lg:col-span-5 space-y-4">
+                    <!-- Certificate Image preview card -->
+                    <div class="glass-card p-4 rounded-2xl relative group overflow-hidden">
+                        <a href="https://www.coursera.org/account/accomplishments/professional-cert/LMTDNASPE8WP" target="_blank" rel="noopener noreferrer" class="block relative rounded-xl overflow-hidden">
+                            <img src="https://i.postimg.cc/zG347njM/Titulo-coursera.jpg" 
+                                 alt="Google Data Analytics Certificate Diploma" 
+                                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Willy71/background/main/picture/002.png'"
+                                 class="w-full h-48 object-cover rounded-xl group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-sm font-semibold gap-2">
+                                <i class="fa-solid fa-magnifying-glass"></i> Inspeccionar Credencial
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- SilverTech Functional Analyst -->
+                    <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-semibold text-blue-400 uppercase tracking-wide">Programa SilverTech</span>
+                            <h4 class="text-base font-bold text-white">Analista Funcional</h4>
+                            <p class="text-xs text-slate-400 mt-1">Relevamiento de requerimientos, diseño de casos de uso, user stories e interlocución entre negocio y desarrollo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Master's Degree UADE -->
+                    <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-semibold text-purple-400 uppercase tracking-wide">UADE - Posgrado</span>
+                            <h4 class="text-base font-bold text-white">Maestría en Dirección Comercial (Marketing)</h4>
+                            <p class="text-xs text-slate-400 mt-1">Estrategias de go-to-market, pricing, segmentación de mercados y gestión comercial estratégica.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Divider Line -->
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+
+        <!-- ================= LINKEDIN RECOMMENDATIONS ================= -->
+        <section id="recommendations" class="space-y-10">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-xs uppercase font-bold tracking-widest text-cyan-400" data-i18n="sec_recs_tag">Confianza & Testimonios</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white" data-i18n="sec_recs_title">Recomendaciones de LinkedIn</h2>
+                <div class="w-16 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-card p-8 rounded-2xl space-y-6 relative flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 text-sm gap-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <i class="fa-brands fa-linkedin text-2xl text-blue-400"></i>
+                        </div>
+                        <blockquote class="text-slate-300 italic text-sm sm:text-base leading-relaxed" data-i18n="rec1_quote">
+                            "Me complace recomendar a Guillermo... Posee la habilidad única de extraer conclusiones prácticas de conjuntos de datos complejos sin perder nunca de vista las realidades operativas del negocio. La dedicación y el sentido de responsabilidad de Guillermo lo convierten en un activo invaluable para cualquier equipo."
+                        </blockquote>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Rodrigo Campos</h4>
+                            <p class="text-xs text-cyan-400 font-medium">Key Account Manager • Mobile Executive Leader</p>
+                        </div>
+                        <a href="https://www.linkedin.com/in/rodrigocampos/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold transition flex items-center gap-1.5">
+                            <span>Perfil</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-card p-8 rounded-2xl space-y-6 relative flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 text-sm gap-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <i class="fa-brands fa-linkedin text-2xl text-blue-400"></i>
+                        </div>
+                        <blockquote class="text-slate-300 italic text-sm sm:text-base leading-relaxed" data-i18n="rec2_quote">
+                            "Guillermo es un excelente gestor, siempre bien predispuesto, muy enfocado en sus objetivos y con una clara orientación a resultados. Es un gran constructor de equipos, siempre dispuesto a aprender cosas nuevas y a liderar el cambio."
+                        </blockquote>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Maximiliano Roca Saran</h4>
+                            <p class="text-xs text-cyan-400 font-medium">Key Account Manager • Mobile Phones</p>
+                        </div>
+                        <a href="https://www.linkedin.com/in/maximiliano-roca-0b628421/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold transition flex items-center gap-1.5">
+                            <span>Perfil</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider Line -->
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+
+        <!-- ================= CONTACT & REACH OUT SECTION ================= -->
+        <section id="contact" class="space-y-10">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-xs uppercase font-bold tracking-widest text-cyan-400" data-i18n="sec_contact_tag">Iniciemos una conversación</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white" data-i18n="sec_contact_title">Contacto Directo</h2>
+                <div class="w-16 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left: Contact Channels -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="glass-panel p-6 rounded-2xl space-y-4">
+                        <h3 class="text-lg font-bold font-display text-white" data-i18n="channels_title">Canales de Comunicación</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed" data-i18n="channels_desc">
+                            ¿Tienes una propuesta laboral, consultoría de datos o buscas colaborar en un proyecto analítico? Escríbeme directamente por cualquiera de estos canales:
+                        </p>
+                    </div>
+
+                    <!-- Direct Card: WhatsApp -->
+                    <a href="https://wa.me/5542991657847" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">WhatsApp</h4>
+                                <p class="text-xs text-emerald-400 font-medium">+55 42 99165-7847</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition text-sm"></i>
+                    </a>
+
+                    <!-- Direct Card: LinkedIn -->
+                    <a href="https://www.linkedin.com/in/willycerato" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">LinkedIn</h4>
+                                <p class="text-xs text-blue-400 font-medium">linkedin.com/in/willycerato</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition text-sm"></i>
+                    </a>
+
+                    <!-- Direct Card: GitHub -->
+                    <a href="https://github.com/Willy71" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800 text-slate-200 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+                                <i class="fa-brands fa-github"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">GitHub</h4>
+                                <p class="text-xs text-slate-400 font-medium">github.com/Willy71</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 group-hover:text-white group-hover:translate-x-1 transition text-sm"></i>
+                    </a>
+
+                    <!-- Email Fast Copy -->
+                    <div class="glass-card p-5 rounded-2xl flex items-center justify-between">
+                        <div class="flex items-center gap-4 overflow-hidden">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <div class="truncate">
+                                <h4 class="text-white font-bold text-sm">Email Directo</h4>
+                                <p id="email-text" class="text-xs text-cyan-400 font-medium truncate">gcerato@gmail.com</p>
+                            </div>
+                        </div>
+                        <button id="btn-copy-email" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-slate-300 text-xs font-semibold transition shrink-0 flex items-center gap-1.5" title="Copiar al portapapeles">
+                            <i class="fa-regular fa-copy"></i>
+                            <span data-i18n="btn_copy">Copiar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Interactive Contact Form -->
+                <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-2xl border-slate-800">
+                    <form id="contact-form" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label for="contact-name" class="block text-xs font-semibold text-slate-300" data-i18n="form_name">Tu Nombre</label>
+                                <input type="text" id="contact-name" required placeholder="Ej. Carlos Mendoza" 
+                                       class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label for="contact-email" class="block text-xs font-semibold text-slate-300" data-i18n="form_email">Tu Correo Electrónico</label>
+                                <input type="email" id="contact-email" required placeholder="nombre@empresa.com" 
+                                       class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="contact-subject" class="block text-xs font-semibold text-slate-300" data-i18n="form_subject">Asunto</label>
+                            <input type="text" id="contact-subject" required placeholder="Oportunidad laboral / Consulta técnica" 
+                                   class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="contact-message" class="block text-xs font-semibold text-slate-300" data-i18n="form_message">Mensaje</label>
+                            <textarea id="contact-message" rows="4" required placeholder="Describe brevemente tus requerimientos o propuesta..." 
+                                      class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" id="btn-submit-form" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 hover:opacity-95 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/25 transition flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-paper-plane"></i>
+                            <span data-i18n="btn_send_email">Enviar Mensaje a Guillermo</span>
+                        </button>
+                        
+                        <p class="text-[11px] text-center text-slate-500" data-i18n="form_footer_note">
+                            Envío directo con respaldo a gcerato@gmail.com. Respuesta en menos de 24 horas.
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="mt-20 border-t border-slate-800/80 glass-panel py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center font-bold">
+                    GC
+                </div>
+                <div>
+                    <span class="text-white font-semibold">Guillermo Cerato</span> • Portfolio 2026
+                    <p class="text-slate-500">Diseñado con HTML5, Tailwind CSS y JavaScript para máximo rendimiento y despliegue rápido.</p>
+                </div>
+            </div>
+
+            <!-- Tech Badges -->
+            <div class="flex items-center gap-3">
+                <span class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                    <i class="fa-brands fa-python text-blue-400"></i> Python
+                </span>
+                <span class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                    <i class="fa-solid fa-chart-simple text-cyan-400"></i> Streamlit
+                </span>
+                <span class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                    <i class="fa-brands fa-github text-slate-400"></i> GitHub
+                </span>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ================= PROJECT DETAILS MODAL ================= -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel max-w-2xl w-full rounded-2xl border border-slate-700/80 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            
+            <div class="relative h-48 bg-slate-900 overflow-hidden">
+                <img id="modal-img" src="" alt="Project image" class="w-full h-full object-cover">
+                <button onclick="closeProjectModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-950/80 text-slate-300 hover:text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+                <span id="modal-badge" class="absolute bottom-4 left-4 px-3 py-1 rounded-full bg-cyan-950/90 text-cyan-300 border border-cyan-500/40 text-xs font-bold uppercase">
+                    Badge
+                </span>
+            </div>
+
+            <div class="p-6 space-y-4">
+                <h3 id="modal-title" class="text-2xl font-bold font-display text-white">Project Title</h3>
+                
+                <p id="modal-desc" class="text-sm text-slate-300 leading-relaxed">
+                    Detailed description of the project.
+                </p>
+
+                <div class="space-y-2 pt-2">
+                    <h4 class="text-xs uppercase font-bold tracking-wider text-slate-400">Puntos Clave & Tecnologías:</h4>
+                    <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+                    <button onclick="closeProjectModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                        Cerrar
+                    </button>
+                    <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-95 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Aplicación
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // Project Data for Modal
+        const projectData = {
+            cyclistic: {
+                title: "Coursera Case Study: Cyclistic Chicago Bike Share",
+                category: "Data Analytics",
+                img: "https://github.com/Willy71/background/blob/main/picture/Coursera.png?raw=true",
+                desc: "Análisis exhaustivo del comportamiento de viajes de bicicletas públicas en Chicago (Cyclistic). Se analizó un volumen masivo de datos para identificar diferencias operativas entre usuarios casuales y miembros anuales, derivando en recomendaciones de marketing para maximizar la suscripción anual. Construido con Streamlit y Pandas.",
+                tags: ["Python", "Pandas", "Streamlit", "Data Cleaning", "Data Visualization", "Storytelling"],
+                link: "https://chicagobike.streamlit.app/"
+            },
+            marketing: {
+                title: "Strategic Marketing Plan (VK Campaign)",
+                category: "Data Analytics & Strategy",
+                img: "https://github.com/Willy71/vk_tarefa1/blob/main/picture/Marketing.png?raw=true",
+                desc: "Desarrollo de un plan estratégico data-driven para optimización de presupuestos de marketing y segmentación de audiencias de alto valor. Permite evaluar el embudo de conversión y proyectar el impacto económico antes de ejecutar pautas publicitarias.",
+                tags: ["Marketing Analytics", "Python", "Streamlit", "Segmentation", "ROI Projection"],
+                link: "https://vktarefa1.streamlit.app/"
+            },
+            oficina: {
+                title: "Oficina Mecânica - Gestión y Facturación",
+                category: "Full-Stack Web App",
+                img: "https://github.com/Willy71/background/blob/main/picture/Portfolio%20011.png?raw=true",
+                desc: "Solución de software integral para la operativa de talleres mecánicos. Facilita el alta y control de vehículos, clientes, inventario de repuestos, generación de presupuestos, órdenes de trabajo y métricas financieras de facturación mensual.",
+                tags: ["Python", "Streamlit", "SQL / Database", "ERP / Gestión", "Full-Stack"],
+                link: "https://oficinamecanica.streamlit.app/"
+            },
+            hotel: {
+                title: "Hotel Service Management App",
+                category: "Hospitality Management App",
+                img: "https://i.postimg.cc/MHK9TS34/Hotel001.jpg",
+                desc: "Plataforma para agilizar la interacción entre huéspedes y el área de conserjería/room service. Permite registrar solicitudes de mantenimiento, pedidos gastronómicos a la habitación y consultar disponibilidad de servicios en tiempo real.",
+                tags: ["Python", "Render Deploy", "Hospitality Management", "Service Queue", "Streamlit"],
+                link: "https://hotelservice-ynsh.onrender.com/"
+            },
+            confort: {
+                title: "Propuesta de Nueva Funcionalidad (Confort)",
+                category: "Functional Analysis & Product",
+                img: "https://github.com/Willy71/background/blob/main/picture/Miniatura%20-%20Analista%20funcional.png?raw=true",
+                desc: "Documentación y prototipado interactivo para la incorporación de una nueva prestación funcional en un sistema en producción. Incluye casos de uso, diagrama de flujo, historias de usuario y validación de interfaz.",
+                tags: ["Functional Analysis", "UX/UI Prototyping", "User Stories", "Streamlit"],
+                link: "https://confort.streamlit.app/"
+            },
+            crm: {
+                title: "CRM para Talleres Mecánicos",
+                category: "Sales CRM App",
+                img: "https://github.com/Willy71/background/blob/main/picture/Portfolio%20012.png?raw=true",
+                desc: "Aplicación CRM focalizada en el seguimiento de prospectos para talleres mecánicos. Automatiza recordatorios de mantenimiento preventivo, seguimiento de presupuestos pendientes y conversión de leads.",
+                tags: ["Python", "CRM Pipeline", "Sales Analytics", "Streamlit"],
+                link: "https://oficinasleads.streamlit.app/"
+            },
+            washcar: {
+                title: "Car Wash System (Lava Jato)",
+                category: "Python CLI System",
+                img: "https://i.postimg.cc/nrR09P6L/lavajato.jpg",
+                desc: "Sistema en consola para la gestión ágil de lavaderos de vehículos. Maneja turnos, cálculo de tarifas según tipo de vehículo, liquidación de operarios y reportes de cierre de caja.",
+                tags: ["Python", "CLI", "Object-Oriented Programming", "Automotive Services"],
+                link: "https://github.com/Willy71/washcar"
+            },
+            parking: {
+                title: "Smart Parking Lot Management Simulator",
+                category: "Algorithms & Simulation",
+                img: "https://i.postimg.cc/ZRLf4RHp/Estacionamiento.jpg",
+                desc: "Script y simulador en Python para el control de plazas de estacionamiento en tiempo real. Gestiona entradas, salidas, cálculo de tiempos fraccionados y liquidación automática de cobro.",
+                tags: ["Python", "Simulation", "Data Structures", "Fee Logic"],
+                link: "https://github.com/Willy71/parking"
+            }
+        };
+
+        // Multi-language dictionary
+        const translations = {
+            es: {
+                nav_about: "Sobre Mí",
+                nav_skills: "Habilidades",
+                nav_projects: "Proyectos",
+                nav_certs: "Certificaciones",
+                nav_recs: "Referencias",
+                nav_contact: "Contacto",
+                nav_talk: "Hablemos",
+                hero_desc: "Hola, soy Guillermo Cerato. Analista de Datos certificado por Google, Desarrollador Python y Analista Funcional. Conecto el rigor estadístico y la ingeniería de software para impulsar el crecimiento empresarial.",
+                stat_projects: "Proyectos Clave",
+                stat_cert: "Certificado",
+                stat_exp: "Trayectoria Líder",
+                hero_btn_projects: "Explorar Proyectos",
+                hero_card_mini: "Especialista en modelado de datos, tableros interactivos con Streamlit & Power BI, y optimización de procesos operativos.",
+                sec_about_tag: "Trayectoria & Perfil",
+                sec_about_title: "Sobre Mí",
+                about_p1: "Soy un profesional argentino radicado en Brasil desde 2016, con una trayectoria sólida y multidisciplinaria que combina turismo, gestión empresarial y liderazgo de equipos de alto rendimiento.",
+                about_p2: "Mi carrera en Argentina, destacando roles clave en Nokia, forjó una sólida base en la toma de decisiones basada en datos, donde el análisis estadístico y los indicadores de gestión (KPIs) fueron fundamentales para maximizar la rentabilidad y la eficiencia operativa.",
+                about_p3: "Mi pasión por la analítica me impulsó a especializarme a fondo en SQL, Python, Streamlit y Power BI. Poseo la certificación oficial de Google Data Analytics y la formación de Analista Funcional (SilverTech). Mi motor es la curiosidad constante y la dedicación para convertir grandes volúmenes de datos dispersos en decisiones estratégicas de alto impacto.",
+                pillar_1_title: "Toma de Decisiones con Datos",
+                pillar_1_desc: "Extracción de insights accionables alineados con la realidad comercial.",
+                pillar_2_title: "Desarrollo Python & Web",
+                pillar_2_desc: "Construcción de dashboards interactivos y aplicaciones web operativas.",
+                sec_skills_tag: "Herramientas & Competencias",
+                sec_skills_title: "Habilidades Técnicas",
+                skill_col1_title: "Programación & Datos",
+                skill_col1_desc: "Ingeniería y tratamiento de datos para preparación de analítica fiable.",
+                skill_col2_title: "Negocio & Visualización",
+                skill_col2_desc: "Traducción de métricas numéricas a relatos comprensibles para gerencia.",
+                skill_col3_title: "Herramientas & Métodos",
+                skill_col3_desc: "Marcos ágiles para relevamiento de requisitos y entrega continua.",
+                sec_projects_tag: "Casos Reales & Desarrollos",
+                sec_projects_title: "Mis Proyectos",
+                sec_projects_sub: "Explora aplicaciones en vivo y casos de estudio analíticos desplegados en producción con Python y Streamlit.",
+                filter_all: "Todos (8)",
+                filter_analytics: "Data Analytics",
+                filter_webapps: "Web Apps & CRM",
+                filter_tools: "Sistemas & CLI",
+                btn_demo: "App en Vivo",
+                p1_desc: "Análisis integral de viajes de bicicletas en Chicago. Dashboard interactivo en Python y Streamlit para optimizar la conversión de usuarios ocasionales a miembros anuales.",
+                p2_desc: "Plan estratégico basado en datos para campaña de marketing. Segmentación de clientes clave, evaluación de retorno y modelado predictivo de audiencia.",
+                p3_desc: "Aplicación web completa en Python para la gestión de talleres automotrices: control de clientes, órdenes de servicio, historial de piezas y facturación.",
+                p4_desc: "Sistema de servicios hoteleros y reservas. Módulo interactivo de solicitud de servicios a la habitación, estado de reservas y analítica para conserjería.",
+                p5_desc: "Análisis funcional detallado y diseño de requerimientos para nueva funcionalidad en una aplicación existente, con prototipo funcional interactivo.",
+                p6_desc: "Herramienta ágil de seguimiento y conversión de clientes potenciales para talleres mecánicos, facilitando la trazabilidad comercial y métricas de embudo.",
+                p7_desc: "Sistema de consola en Python para la administración de turnos, agendamiento de lavados automotrices, cálculo de tarifas y control de servicios.",
+                p8_desc: "Algoritmo en Python para simular y controlar la ocupación de un estacionamiento, cálculo de fracciones de tiempo transcurrido y liquidación de tarifas.",
+                sec_edu_tag: "Formación Continua",
+                sec_edu_title: "Educación & Certificaciones",
+                btn_verify: "Ver Certificado",
+                google_cert_desc: "Programa riguroso de especialización que abarca el ciclo de vida completo de los datos: formulación de hipótesis, extracción, procesamiento y limpieza rigurosa, modelado analítico en R y SQL, y visualización en Tableau.",
+                courses_breakdown: "Programa de 8 Cursos Completados:",
+                sec_recs_tag: "Confianza & Testimonios",
+                sec_recs_title: "Recomendaciones de LinkedIn",
+                rec1_quote: '"Me complace recomendar a Guillermo... Posee la habilidad única de extraer conclusiones prácticas de conjuntos de datos complejos sin perder nunca de vista las realidades operativas del negocio. La dedicación y el sentido de responsabilidad de Guillermo lo convierten en un activo invaluable para cualquier equipo."',
+                rec2_quote: '"Guillermo es un excelente gestor, siempre bien predispuesto, muy enfocado en sus objetivos y con una clara orientación a resultados. Es un gran constructor de equipos, siempre dispuesto a aprender cosas nuevas y a liderar el cambio."',
+                sec_contact_tag: "Iniciemos una conversación",
+                sec_contact_title: "Contacto Directo",
+                channels_title: "Canales de Comunicación",
+                channels_desc: "¿Tienes una propuesta laboral, consultoría de datos o buscas colaborar en un proyecto analítico? Escríbeme directamente por cualquiera de estos canales:",
+                btn_copy: "Copiar",
+                form_name: "Tu Nombre",
+                form_email: "Tu Correo Electrónico",
+                form_subject: "Asunto",
+                form_message: "Mensaje",
+                btn_send_email: "Enviar Mensaje a Guillermo",
+                form_footer_note: "Envío directo con respaldo a gcerato@gmail.com. Respuesta en menos de 24 horas."
+            },
+            en: {
+                nav_about: "About Me",
+                nav_skills: "Skills",
+                nav_projects: "Projects",
+                nav_certs: "Certifications",
+                nav_recs: "Testimonials",
+                nav_contact: "Contact",
+                nav_talk: "Let's Talk",
+                hero_desc: "Hi, I'm Guillermo Cerato. Google-certified Data Analyst, Python Developer, and Functional Analyst. I bridge the gap between statistical rigor and software engineering to drive strategic business growth.",
+                stat_projects: "Key Projects",
+                stat_cert: "Certified",
+                stat_exp: "Leadership Track",
+                hero_btn_projects: "Explore Projects",
+                hero_card_mini: "Specialist in data modeling, interactive dashboards with Streamlit & Power BI, and operational process optimization.",
+                sec_about_tag: "Background & Profile",
+                sec_about_title: "About Me",
+                about_p1: "I am an Argentinian professional based in Brazil since 2016, with a diverse background spanning tourism, entrepreneurship, and high-performance team management.",
+                about_p2: "My career in Argentina, including key leadership roles at Nokia, built a strong foundation in data-driven decision-making, where metrics and statistical analysis were essential to maximize profitability.",
+                about_p3: "My passion for data drove me to master SQL, Python, Streamlit, and Power BI. I am a Google-certified Data Analyst and a SilverTech-trained Functional Analyst. I thrive on turning complex datasets into actionable business insights.",
+                pillar_1_title: "Data-Driven Decision Making",
+                pillar_1_desc: "Extracting actionable insights grounded in operational and commercial reality.",
+                pillar_2_title: "Python & Web Development",
+                pillar_2_desc: "Building interactive dashboards and production-ready operational web apps.",
+                sec_skills_tag: "Tools & Competencies",
+                sec_skills_title: "Technical Skills",
+                skill_col1_title: "Programming & Data",
+                skill_col1_desc: "Data engineering and wrangling for reliable business analytics.",
+                skill_col2_title: "Business & Visualization",
+                skill_col2_desc: "Translating numbers into compelling stories for executive teams.",
+                skill_col3_title: "Tools & Methodologies",
+                skill_col3_desc: "Agile frameworks for requirements gathering and continuous delivery.",
+                sec_projects_tag: "Real Cases & Deployments",
+                sec_projects_title: "My Projects",
+                sec_projects_sub: "Explore live applications and analytical case studies deployed in production with Python and Streamlit.",
+                filter_all: "All (8)",
+                filter_analytics: "Data Analytics",
+                filter_webapps: "Web Apps & CRM",
+                filter_tools: "Systems & CLI",
+                btn_demo: "Live App",
+                p1_desc: "Comprehensive analysis of Chicago bike trip data. Interactive Python & Streamlit dashboard designed to convert casual riders into annual members.",
+                p2_desc: "Data-driven strategic marketing plan. Customer segmentation, ROI forecasting, and audience predictive modeling.",
+                p3_desc: "Full-stack web application built with Python to manage auto repair shops: clients, work orders, parts inventory, and billing.",
+                p4_desc: "Hotel service management and booking platform. Real-time room service requests, booking status, and analytics for concierge.",
+                p5_desc: "Detailed functional analysis and requirements design for a new application feature, including an interactive working prototype.",
+                p6_desc: "Agile sales CRM application tailored for mechanic workshops to track leads, schedule follow-ups, and analyze conversion funnels.",
+                p7_desc: "Command-line Python system to schedule appointments, calculate service fees, and manage car wash operations.",
+                p8_desc: "Python simulation script to monitor parking lot occupancy, compute fractional stay fees, and manage revenue collection.",
+                sec_edu_tag: "Lifelong Learning",
+                sec_edu_title: "Education & Certifications",
+                btn_verify: "Verify Credential",
+                google_cert_desc: "Rigorous 8-course program covering the complete data lifecycle: hypothesis drafting, ETL data cleaning, statistical modeling with R and SQL, and visualization with Tableau.",
+                courses_breakdown: "Completed 8-Course Curriculum:",
+                sec_recs_tag: "Trust & Recommendations",
+                sec_recs_title: "LinkedIn Recommendations",
+                rec1_quote: '"I am glad to recommend Guillermo... He possesses the unique ability to extract actionable insights from complex data sets without losing sight of operational realities. Guillermo\'s dedication and sense of responsibility make him an invaluable asset to any team."',
+                rec2_quote: '"Guillermo is an excellent manager, always predisposed, very focused on what he does, and results-oriented. He is a great team builder and is always willing to learn new things and embrace change."',
+                sec_contact_tag: "Start a conversation",
+                sec_contact_title: "Get in Touch",
+                channels_title: "Communication Channels",
+                channels_desc: "Have a job opportunity, data consultation, or project collaboration in mind? Reach out directly through any of these channels:",
+                btn_copy: "Copy",
+                form_name: "Your Name",
+                form_email: "Your Email Address",
+                form_subject: "Subject",
+                form_message: "Message",
+                btn_send_email: "Send Message to Guillermo",
+                form_footer_note: "Direct dispatch with backup to gcerato@gmail.com. Response within 24 hours."
+            }
+        };
+
+        let currentLang = 'es';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const dict = translations[lang];
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) {
+                    el.textContent = dict[key];
+                }
+            });
+
+            // Update language button styles
+            const btnEs = document.getElementById('btn-lang-es');
+            const btnEn = document.getElementById('btn-lang-en');
+            const btnEsM = document.getElementById('btn-lang-es-mobile');
+            const btnEnM = document.getElementById('btn-lang-en-mobile');
+
+            if (lang === 'es') {
+                btnEs.className = "px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold transition";
+                btnEn.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white transition";
+                if (btnEsM) btnEsM.className = "px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold";
+                if (btnEnM) btnEnM.className = "px-2 py-1 rounded text-slate-400";
+            } else {
+                btnEn.className = "px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold transition";
+                btnEs.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white transition";
+                if (btnEnM) btnEnM.className = "px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold";
+                if (btnEsM) btnEsM.className = "px-2 py-1 rounded text-slate-400";
+            }
+            
+            try {
+                localStorage.setItem('portfolio_lang', lang);
+            } catch(e) {}
+        }
+
+        // Initialize language
+        try {
+            const savedLang = localStorage.getItem('portfolio_lang');
+            if (savedLang && translations[savedLang]) {
+                setLanguage(savedLang);
+            }
+        } catch(e) {}
+
+        document.getElementById('btn-lang-es').addEventListener('click', () => setLanguage('es'));
+        document.getElementById('btn-lang-en').addEventListener('click', () => setLanguage('en'));
+        const btnEsM = document.getElementById('btn-lang-es-mobile');
+        const btnEnM = document.getElementById('btn-lang-en-mobile');
+        if (btnEsM) btnEsM.addEventListener('click', () => setLanguage('es'));
+        if (btnEnM) btnEnM.addEventListener('click', () => setLanguage('en'));
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.replace('fa-bars', 'fa-xmark');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.replace('fa-xmark', 'fa-bars');
+            }
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.replace('fa-xmark', 'fa-bars');
+            });
+        });
+
+        // Project Filtering Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-cyan-500', 'text-slate-950');
+                    b.classList.add('text-slate-300');
+                });
+                btn.classList.add('active', 'bg-cyan-500', 'text-slate-950');
+                btn.classList.remove('text-slate-300');
+
+                const filter = btn.getAttribute('data-filter');
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('project-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalBadge = document.getElementById('modal-badge');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalTags = document.getElementById('modal-tags');
+        const modalLink = document.getElementById('modal-link');
+
+        window.openProjectModal = function(key) {
+            const item = projectData[key];
+            if (!item) return;
+
+            modalImg.src = item.img;
+            modalBadge.textContent = item.category;
+            modalTitle.textContent = item.title;
+            modalDesc.textContent = item.desc;
+            modalLink.href = item.link;
+
+            modalTags.innerHTML = '';
+            item.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = "text-xs px-2.5 py-1 rounded bg-slate-800 text-cyan-300 border border-slate-700";
+                span.textContent = tag;
+                modalTags.appendChild(span);
+            });
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeProjectModal = function() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        };
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeProjectModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeProjectModal();
+        });
+
+        // Toast Helper
+        function showToast(msg, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.textContent = msg;
+            if (isSuccess) {
+                toastIcon.className = "fa-solid fa-circle-check text-cyan-400 text-lg";
+            } else {
+                toastIcon.className = "fa-solid fa-triangle-exclamation text-amber-400 text-lg";
+            }
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3500);
+        }
+
+        // Copy Email Button
+        document.getElementById('btn-copy-email').addEventListener('click', () => {
+            const email = "gcerato@gmail.com";
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(() => {
+                    showToast(currentLang === 'es' ? "¡Correo copiado al portapapeles!" : "Email copied to clipboard!");
+                }).catch(() => {
+                    fallbackCopy(email);
+                });
+            } else {
+                fallbackCopy(email);
+            }
+        });
+
+        function fallbackCopy(text) {
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            try {
+                document.execCommand('copy');
+                showToast(currentLang === 'es' ? "¡Correo copiado al portapapeles!" : "Email copied to clipboard!");
+            } catch(err) {
+                showToast("gcerato@gmail.com", true);
+            }
+            document.body.removeChild(temp);
+        }
+
+        // Contact Form Submission
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const subject = document.getElementById('contact-subject').value.trim();
+            const message = document.getElementById('contact-message').value.trim();
+
+            if (!name || !email || !subject || !message) {
+                showToast(currentLang === 'es' ? "Por favor completa todos los campos" : "Please fill out all fields", false);
+                return;
+            }
+
+            // Create mailto link fallback
+            const mailtoBody = encodeURIComponent(`De: ${name} (${email})\n\nMensaje:\n${message}`);
+            const mailtoUrl = `mailto:gcerato@gmail.com?subject=${encodeURIComponent(subject)}&body=${mailtoBody}`;
+
+            showToast(currentLang === 'es' ? "¡Gracias! Abriendo tu cliente de correo..." : "Thank you! Opening your email client...", true);
+
+            setTimeout(() => {
+                window.location.href = mailtoUrl;
+            }, 800);
+
+            // Reset form
+            document.getElementById('contact-form').reset();
+        });
+    </script>
+</body>
+</html>
