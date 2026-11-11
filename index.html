@@ -153,10 +153,11 @@
 
             <!-- Language Switcher & Quick CTA -->
             <div class="hidden sm:flex items-center gap-3">
-                <!-- Language Toggle Button -->
+                <!-- Language Toggle Button (ES / EN / PT) -->
                 <div class="flex items-center bg-slate-900 border border-slate-700/60 rounded-lg p-0.5 text-xs font-semibold">
-                    <button id="btn-lang-es" class="px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold transition">ES</button>
-                    <button id="btn-lang-en" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition">EN</button>
+                    <button id="btn-lang-es" class="px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold transition">ES</button>
+                    <button id="btn-lang-en" class="px-2 py-1 rounded text-slate-400 hover:text-white transition">EN</button>
+                    <button id="btn-lang-pt" class="px-2 py-1 rounded text-slate-400 hover:text-white transition">PT</button>
                 </div>
 
                 <!-- Direct WhatsApp CTA -->
@@ -174,8 +175,9 @@
             <!-- Mobile Hamburger Button -->
             <div class="flex items-center gap-2 md:hidden">
                 <div class="flex items-center bg-slate-900 border border-slate-700/60 rounded-lg p-0.5 text-xs font-semibold mr-1">
-                    <button id="btn-lang-es-mobile" class="px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold">ES</button>
-                    <button id="btn-lang-en-mobile" class="px-2 py-1 rounded text-slate-400">EN</button>
+                    <button id="btn-lang-es-mobile" class="px-1.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold text-[11px]">ES</button>
+                    <button id="btn-lang-en-mobile" class="px-1.5 py-1 rounded text-slate-400 text-[11px]">EN</button>
+                    <button id="btn-lang-pt-mobile" class="px-1.5 py-1 rounded text-slate-400 text-[11px]">PT</button>
                 </div>
                 <button id="mobile-menu-btn" aria-label="Abrir menú" class="w-10 h-10 rounded-lg glass-panel flex items-center justify-center text-slate-300 hover:text-cyan-400">
                     <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
@@ -1431,6 +1433,76 @@
                 form_message: "Message",
                 btn_send_email: "Send Message to Guillermo",
                 form_footer_note: "Direct dispatch with backup to gcerato@gmail.com. Response within 24 hours."
+            },
+            pt: {
+                nav_about: "Sobre Mim",
+                nav_skills: "Habilidades",
+                nav_projects: "Projetos",
+                nav_certs: "Certificações",
+                nav_recs: "Recomendações",
+                nav_contact: "Contato",
+                nav_talk: "Fale Comigo",
+                hero_title_prefix: "Transformando dados complexos em",
+                hero_title_highlight: "decisões estratégicas",
+                hero_desc: "Olá, sou Guillermo Cerato. Analista de Dados certificado pelo Google, Desenvolvedor Python e Analista Funcional. Uno o rigor estatístico ao desenvolvimento de software para impulsionar o crescimento do seu negócio.",
+                stat_projects: "Projetos em Destaque",
+                stat_cert: "Certificado",
+                stat_exp: "Liderança & Exp",
+                hero_btn_projects: "Ver Projetos",
+                hero_card_mini: "Especialista em modelagem de dados, dashboards interativos com Streamlit & Power BI e otimização de processos operacionais.",
+                sec_about_tag: "Trajetória & Perfil",
+                sec_about_title: "Sobre Mim",
+                about_p1: "Sou um profissional argentino radicado no Brasil desde 2016, com uma trajetória sólida e multidisciplinar que combina turismo, gestão empresarial e liderança de equipes de alto rendimento.",
+                about_p2: "Minha carreira na Argentina, com destaque para atuações estratégicas na Nokia, consolidou uma forte mentalidade analítica baseada em métricas, indicadores de gestão (KPIs) e análise estatística para maximizar a rentabilidade e a eficiência operacional.",
+                about_p3: "Minha paixão por dados me levou a me especializar a fundo em SQL, Python, Streamlit e Power BI. Possuo a certificação profissional Google Data Analytics e formação em Analista Funcional (SilverTech). Sou movido pela curiosidade constante e dedicação para transformar grandes volumes de dados em insights estratégicos de alto impacto.",
+                pillar_1_title: "Tomada de Decisão com Dados",
+                pillar_1_desc: "Extração de insights práticos alinhados à realidade comercial e operacional.",
+                pillar_2_title: "Desenvolvimento Python & Web",
+                pillar_2_desc: "Criação de dashboards interativos e aplicações web operacionais.",
+                sec_skills_tag: "Ferramentas & Competências",
+                sec_skills_title: "Habilidades Técnicas",
+                skill_col1_title: "Programação & Dados",
+                skill_col1_desc: "Engenharia e tratamento de dados para geração de inteligência confiável.",
+                skill_col2_title: "Negócios & Visualização",
+                skill_col2_desc: "Tradução de métricas numéricas em narrativas visuais para lideranças.",
+                skill_col3_title: "Ferramentas & Métodos",
+                skill_col3_desc: "Frameworks ágeis para levantamento de requisitos e entregas contínuas.",
+                sec_projects_tag: "Casos Reais & Produção",
+                sec_projects_title: "Meus Projetos",
+                sec_projects_sub: "Explore aplicações ativas e estudos de caso analíticos desenvolvidos em Python e Streamlit.",
+                filter_all: "Todos (8)",
+                filter_analytics: "Data Analytics",
+                filter_webapps: "Web Apps & CRM",
+                filter_tools: "Sistemas & CLI",
+                btn_demo: "App ao Vivo",
+                p1_desc: "Análise abrangente de viagens de bicicletas compartilhadas em Chicago (Cyclistic). Dashboard interativo em Python e Streamlit para converter usuários casuais em membros anuais.",
+                p2_desc: "Plano estratégico orientado a dados para campanha de marketing. Segmentação de clientes prioritários, projeção de ROI e modelagem preditiva de audiência.",
+                p3_desc: "Aplicação web completa em Python para gestão de oficinas mecânicas: cadastro de clientes, ordens de serviço, controle de peças e faturamento.",
+                p4_desc: "Sistema de gestão de serviços e reservas para hotelaria. Módulo de solicitações em tempo real para hóspedes, status de quarto e suporte à recepção.",
+                p5_desc: "Análise funcional e especificação de requisitos para uma nova funcionalidade de software, com protótipo interativo validado.",
+                p6_desc: "CRM ágil de prospecção e acompanhamento de clientes para oficinas mecânicas, com métricas de conversão e funil de vendas.",
+                p7_desc: "Sistema de console em Python para agendamento de lavagens automotivas, cálculo automático de tarifas e controle de atendimentos.",
+                p8_desc: "Algoritmo em Python para simulação e controle de ocupação de estacionamento, tarifação fracionada por tempo e controle de receitas.",
+                sec_edu_tag: "Aprendizado Contínuo",
+                sec_edu_title: "Educação & Certificações",
+                btn_verify: "Ver Certificado",
+                google_cert_desc: "Programa rigoroso que abrange todo o ciclo de vida dos dados: formulação de hipóteses, extração, limpeza profunda, modelagem estatística com R e SQL, e visualização no Tableau.",
+                courses_breakdown: "Grade de 8 Cursos Concluídos:",
+                sec_recs_tag: "Confiança & Depoimentos",
+                sec_recs_title: "Recomendações no LinkedIn",
+                rec1_quote: '"Tenho o prazer de recomendar o Guillermo... Ele possui a rara habilidade de extrair conclusões práticas de conjuntos de dados complexos sem nunca perder de vista a realidade operacional do negócio. Sua dedicação e senso de responsabilidade fazem dele um profissional de valor inestimável para qualquer equipe."',
+                rec2_quote: '"Guillermo é um excelente gestor, sempre com ótima disposição, muito focado em suas metas e com clara orientação para resultados. É um grande construtor de equipes, sempre disposto a aprender novidades e a liderar transformações."',
+                sec_contact_tag: "Vamos conversar",
+                sec_contact_title: "Contato Direto",
+                channels_title: "Canais de Comunicação",
+                channels_desc: "Tem uma proposta de trabalho, consultoria de dados ou quer colaborar em um projeto analítico? Entre em contato por qualquer um destes canais:",
+                btn_copy: "Copiar",
+                form_name: "Seu Nome",
+                form_email: "Seu E-mail",
+                form_subject: "Assunto",
+                form_message: "Mensagem",
+                btn_send_email: "Enviar Mensagem para o Guillermo",
+                form_footer_note: "Envio direto com cópia de segurança para gcerato@gmail.com. Resposta em menos de 24 horas."
             }
         };
 
@@ -1452,23 +1524,26 @@
             if (titlePrefix && dict.hero_title_prefix) titlePrefix.textContent = dict.hero_title_prefix;
             if (titleHighlight && dict.hero_title_highlight) titleHighlight.textContent = dict.hero_title_highlight;
 
-            // Update language button styles
-            const btnEs = document.getElementById('btn-lang-es');
-            const btnEn = document.getElementById('btn-lang-en');
-            const btnEsM = document.getElementById('btn-lang-es-mobile');
-            const btnEnM = document.getElementById('btn-lang-en-mobile');
-
-            if (lang === 'es') {
-                btnEs.className = "px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold transition";
-                btnEn.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white transition";
-                if (btnEsM) btnEsM.className = "px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold";
-                if (btnEnM) btnEnM.className = "px-2 py-1 rounded text-slate-400";
-            } else {
-                btnEn.className = "px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold transition";
-                btnEs.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white transition";
-                if (btnEnM) btnEnM.className = "px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold";
-                if (btnEsM) btnEsM.className = "px-2 py-1 rounded text-slate-400";
-            }
+            // Update language button styles (ES / EN / PT)
+            const langs = ['es', 'en', 'pt'];
+            langs.forEach(l => {
+                const b = document.getElementById('btn-lang-' + l);
+                const bm = document.getElementById('btn-lang-' + l + '-mobile');
+                if (b) {
+                    if (l === lang) {
+                        b.className = "px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold transition";
+                    } else {
+                        b.className = "px-2 py-1 rounded text-slate-400 hover:text-white transition";
+                    }
+                }
+                if (bm) {
+                    if (l === lang) {
+                        bm.className = "px-1.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold text-[11px]";
+                    } else {
+                        bm.className = "px-1.5 py-1 rounded text-slate-400 text-[11px]";
+                    }
+                }
+            });
             
             try {
                 localStorage.setItem('portfolio_lang', lang);
@@ -1485,10 +1560,13 @@
 
         document.getElementById('btn-lang-es').addEventListener('click', () => setLanguage('es'));
         document.getElementById('btn-lang-en').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('btn-lang-pt').addEventListener('click', () => setLanguage('pt'));
         const btnEsM = document.getElementById('btn-lang-es-mobile');
         const btnEnM = document.getElementById('btn-lang-en-mobile');
+        const btnPtM = document.getElementById('btn-lang-pt-mobile');
         if (btnEsM) btnEsM.addEventListener('click', () => setLanguage('es'));
         if (btnEnM) btnEnM.addEventListener('click', () => setLanguage('en'));
+        if (btnPtM) btnPtM.addEventListener('click', () => setLanguage('pt'));
 
         // Mobile Menu Toggle
         const mobileBtn = document.getElementById('mobile-menu-btn');
