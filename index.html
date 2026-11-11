@@ -219,8 +219,8 @@
 
                     <!-- Main Catchy Title -->
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-white leading-tight">
-                        Transformando datos complejos en 
-                        <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
+                        <span id="hero-title-prefix">Transformando datos complejos en</span> 
+                        <span id="hero-title-highlight" class="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
                             decisiones estratégicas
                         </span>
                     </h1>
@@ -1300,6 +1300,8 @@
                 nav_recs: "Referencias",
                 nav_contact: "Contacto",
                 nav_talk: "Hablemos",
+                hero_title_prefix: "Transformando datos complejos en",
+                hero_title_highlight: "decisiones estratégicas",
                 hero_desc: "Hola, soy Guillermo Cerato. Analista de Datos certificado por Google, Desarrollador Python y Analista Funcional. Conecto el rigor estadístico y la ingeniería de software para impulsar el crecimiento empresarial.",
                 stat_projects: "Proyectos Clave",
                 stat_cert: "Certificado",
@@ -1368,6 +1370,8 @@
                 nav_recs: "Testimonials",
                 nav_contact: "Contact",
                 nav_talk: "Let's Talk",
+                hero_title_prefix: "Transforming complex data into",
+                hero_title_highlight: "strategic decisions",
                 hero_desc: "Hi, I'm Guillermo Cerato. Google-certified Data Analyst, Python Developer, and Functional Analyst. I bridge the gap between statistical rigor and software engineering to drive strategic business growth.",
                 stat_projects: "Key Projects",
                 stat_cert: "Certified",
@@ -1442,6 +1446,11 @@
                     el.textContent = dict[key];
                 }
             });
+
+            const titlePrefix = document.getElementById('hero-title-prefix');
+            const titleHighlight = document.getElementById('hero-title-highlight');
+            if (titlePrefix && dict.hero_title_prefix) titlePrefix.textContent = dict.hero_title_prefix;
+            if (titleHighlight && dict.hero_title_highlight) titleHighlight.textContent = dict.hero_title_highlight;
 
             // Update language button styles
             const btnEs = document.getElementById('btn-lang-es');
